@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sudoku;
 
 namespace Sudoku_Cli
 {
@@ -16,6 +17,7 @@ namespace Sudoku_Cli
                 " the number of sudoku's output.");
         }
     }
+
     class Program
     {
         static void Main(string[] args)
@@ -41,11 +43,19 @@ namespace Sudoku_Cli
                         "between 0 and 1000,000");
                     return;
                 }
-                using (System.IO.StreamWriter outputfile =
-                    new System.IO.StreamWriter(@"sudoku.txt"))
+
+                var sudo = new Sudoku.Sudo();
+
+                sudo.Fill1Grid(0, 0, 5);
+                try
                 {
-                    outputfile.WriteLine("Test out put file!");
+                    sudo.FillNextGrid(0, 1);
                 }
+                catch (Sudoku.EnoughResultsException ex)
+                {
+                    System.Console.WriteLine(ex);
+                }
+                System.Console.WriteLine("End of Program"); // I don't think this line can be execute
             }
             catch (System.FormatException)
             {
