@@ -31,7 +31,7 @@ namespace Sudoku
                     {
                         int nexti = j == LAST ? i + 1 : i;
                         int nextj = j == LAST ? 0 : j + 1;
-                        FillNextGrid(nexti, nexti);
+                        FillNextGrid(nexti, nextj);
                     }
                 }
                 else
@@ -45,7 +45,7 @@ namespace Sudoku
         private void PrintResult()
         {
             using (System.IO.StreamWriter outputfile =
-         new System.IO.StreamWriter(@"sudoku.txt"))
+         new System.IO.StreamWriter(@"sudoku.txt", true))
             {
                 //outputfile.WriteLine("Test out put file!");
                 for (int i = 0; i <= LAST; i++)
@@ -63,7 +63,7 @@ namespace Sudoku
                 throw new EnoughResultsException();
         }
 
-        private bool FillSuccess(int i, int j)
+        public bool FillSuccess(int i, int j)
         {
             // check column
             for (int ii = i - 1; ii >= 0; ii--)
@@ -81,9 +81,9 @@ namespace Sudoku
             // check small grid
             int basei = i - i % 3;
             int basej = j - j % 3;
-            for (int ii = basei; ii < basei + 3 && ii < i; i++)
+            for (int ii = basei; ii < basei + 3 && ii < i; ii++)
             {
-                for (int jj = basej; jj < basei + 3 && jj < j; j++)
+                for (int jj = basej; jj < basei + 3 && jj < j; jj++)
                 {
                     if (grid[i, j] == grid[ii, jj])
                         return false;
@@ -99,11 +99,6 @@ namespace Sudoku
             var randomlist = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
             return randomlist;
-        }
-
-        public void Fill1Grid(int v1, int v2, int v3)
-        {
-            grid[v1, v2] = v3;
         }
     }
 }

@@ -36,8 +36,8 @@ namespace Sudoku_Cli
             }
             try
             {
-                long num = Int64.Parse(args[1]);
-                if (num > 1000000 || num < 0)
+                int num = Int32.Parse(args[1]);
+                if (num > 1000000 || num < 1)
                 {
                     System.Console.WriteLine("Your input <N> is not " +
                         "between 0 and 1000,000");
@@ -46,7 +46,8 @@ namespace Sudoku_Cli
 
                 var sudo = new Sudoku.Sudo();
 
-                sudo.Fill1Grid(0, 0, 5);
+                sudo.bound = num;
+                sudo.grid[0,0] = 5;
                 try
                 {
                     sudo.FillNextGrid(0, 1);
@@ -55,7 +56,7 @@ namespace Sudoku_Cli
                 {
                     System.Console.WriteLine(ex);
                 }
-                System.Console.WriteLine("End of Program"); // I don't think this line can be execute
+                System.Console.WriteLine("End of Program");
             }
             catch (System.FormatException)
             {
