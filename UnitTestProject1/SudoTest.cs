@@ -10,7 +10,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethod1()
         {
-            var sudo = new Sudoku.Sudo();
+            var sudo = new Sudoku.SudokuGenerater();
 
             sudo.grid = new int[,] {
                 { 2, 6, 8, 4, 7, 3, 9, 5, 1},
@@ -30,7 +30,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethod2()
         {
-            var sudo = new Sudoku.Sudo();
+            var sudo = new Sudoku.SudokuGenerater();
 
             sudo.grid = new int[,] {
                 { 2, 6, 8, 4, 7, 3, 9, 5, 1},
@@ -44,8 +44,25 @@ namespace UnitTestProject1
                 { 4, 5, 2, 7, 3, 9, 1, 8, 6}
             };
 
-            sudo.Fill1Grid(2, 2, 4);
+            sudo.grid[2, 2] = 4;
             Assert.AreEqual(false, sudo.FillSuccess(2, 2));
+        }
+        
+        [TestMethod]
+        public void TestGenerateFillList1()
+        {
+            var sudo = new Sudoku.SudokuGenerater();
+
+            using (System.IO.StreamWriter outputfile =
+         new System.IO.StreamWriter(@"SudokuTest.txt", true))
+            {
+                outputfile.WriteLine(String.Join(" ", sudo.GenerateFillList()));
+                outputfile.WriteLine(String.Join(" ", sudo.GenerateFillList()));
+                outputfile.WriteLine(String.Join(" ", sudo.GenerateFillList()));
+                outputfile.WriteLine(String.Join(" ", sudo.GenerateFillList()));
+                outputfile.WriteLine(String.Join(" ", sudo.GenerateFillList()));
+                outputfile.WriteLine();
+            }
         }
     }
 }

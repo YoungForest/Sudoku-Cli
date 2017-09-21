@@ -44,7 +44,7 @@ namespace Sudoku_Cli
                     return;
                 }
 
-                var sudo = new Sudoku.Sudo();
+                var sudo = new Sudoku.SudokuGenerater();
 
                 sudo.bound = num;
                 sudo.grid[0,0] = 5;

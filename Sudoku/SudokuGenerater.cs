@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Sudoku
 {
-    public class Sudo
+    public class SudokuGenerater
     {
         public int[,] grid = new int[9, 9];
         const int LAST = 8;
         public int count = 0;
         public int bound = 0;
+        public Random rnd = new Random();
+        public int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
         public void FillNextGrid(int i, int j)
         {
@@ -54,9 +56,9 @@ namespace Sudoku
                     {
                         outputfile.Write("{0} ", grid[i, j]);
                     }
-                    outputfile.Write("\n");
+                    outputfile.WriteLine();
                 }
-                outputfile.Write("\n");
+                outputfile.WriteLine();
             }
             count++;
             if (count >= bound)
@@ -96,9 +98,9 @@ namespace Sudoku
         // randomly generate a list containing 1 to 9
         public List<int> GenerateFillList()
         {
-            var randomlist = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int[] MyRandomNumbers = numbers.OrderBy(x => rnd.Next()).ToArray();
 
-            return randomlist;
+            return MyRandomNumbers.ToList();
         }
     }
 }
