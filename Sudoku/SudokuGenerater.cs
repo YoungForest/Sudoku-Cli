@@ -50,7 +50,8 @@ namespace Sudoku
             using (System.IO.StreamWriter outputfile =
          new System.IO.StreamWriter(@"sudoku.txt", true))
             {
-                //outputfile.WriteLine("Test out put file!");
+                if (count != 0)
+                    outputfile.WriteLine();
                 for (int i = 0; i <= LAST; i++)
                 {
                     for (int j = 0; j <= LAST; j++)
@@ -59,7 +60,6 @@ namespace Sudoku
                     }
                     outputfile.WriteLine();
                 }
-                outputfile.WriteLine();
             }
             count++;
             if (count >= bound)

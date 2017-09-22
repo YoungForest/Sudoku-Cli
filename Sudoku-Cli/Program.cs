@@ -88,6 +88,32 @@ namespace Sudoku_Cli
             else if (args[0] == "-s")
             {
                 // sudoku solve
+                try
+                {
+                    // Read each line of the file into a string array. Each element
+                    // of the array is one line of the file.
+                    string [] lines = System.IO.File.ReadAllLines(args[1]);
+                    SudokuSolver sudokuSolver = new SudokuSolver();
+
+                    string[] sublines1 = new string[9];
+                    Array.Copy(lines, 0, sublines1, 0, 9);
+                    sudokuSolver.ReadIntoPuzzle(sublines1);
+                    sudokuSolver.Solve();
+                    sudokuSolver.AppendResultToFile(@"sudoku.txt", false);
+
+                    for (int i = 10; i < lines.Length; i += 10)
+                    {
+                        string[] sublines = new string[9];
+                        Array.Copy(lines, i, sublines, 0, 9);
+                        sudokuSolver.ReadIntoPuzzle(sublines);
+                        sudokuSolver.Solve();
+                        sudokuSolver.AppendResultToFile(@"sudoku.txt", true);
+                    }
+                }
+                catch (System.IO.FileNotFoundException ex)
+                {
+                    System.Console.WriteLine(ex.Message);
+                }
             }
             else
             {

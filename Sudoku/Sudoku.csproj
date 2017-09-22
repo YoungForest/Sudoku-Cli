@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnoughResultsException.cs" />
+    <Compile Include="PuzzleCompleteException.cs" />
     <Compile Include="SudokuGenerater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SudokuSolver.cs" />
