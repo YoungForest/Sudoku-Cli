@@ -8,6 +8,7 @@ namespace Sudoku
 {
     public class SudokuGenerater
     {
+        // 2 !8 = 29666
         public int[,] grid = new int[9, 9];
         const int LAST = 8;
         public int count = 0;
