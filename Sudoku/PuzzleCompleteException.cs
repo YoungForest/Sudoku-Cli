@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Sudoku
+namespace SudokuLibrary
 {
     [Serializable]
     internal class PuzzleCompleteException : Exception

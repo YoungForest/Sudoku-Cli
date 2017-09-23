@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sudoku;
+using SudokuLibrary;
 using System.Diagnostics;
 
 namespace Sudoku_Cli
@@ -57,15 +57,16 @@ namespace Sudoku_Cli
                     // begin generate
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
-                    var sudo = new Sudoku.SudokuGenerater();
-
-                    sudo.bound = num;
+                    var sudo = new SudokuGenerater
+                    {
+                        bound = num
+                    };
                     sudo.grid[0, 0] = 5;
                     try
                     {
                         sudo.FillNextGrid(0, 1);
                     }
-                    catch (Sudoku.EnoughResultsException ex)
+                    catch (SudokuLibrary.EnoughResultsException ex)
                     {
                         System.Console.WriteLine(ex);
                     }
@@ -94,6 +95,13 @@ namespace Sudoku_Cli
                     // of the array is one line of the file.
                     string [] lines = System.IO.File.ReadAllLines(args[1]);
                     SudokuSolver sudokuSolver = new SudokuSolver();
+
+                    // clear the content of sudoku.txt
+                    using (System.IO.StreamWriter outputfile =
+             new System.IO.StreamWriter(@"sudoku.txt"))
+                    {
+                        outputfile.Write("");
+                    }
 
                     string[] sublines1 = new string[9];
                     Array.Copy(lines, 0, sublines1, 0, 9);

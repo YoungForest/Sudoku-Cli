@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sudoku
+namespace SudokuLibrary
 {
     public class SudokuSolver
     {
@@ -49,13 +50,12 @@ namespace Sudoku
                 }
             }
 
-            var sudokuGenerater = new SudokuGenerater();
-            var fillList = sudokuGenerater.GenerateFillList();
+            var fillList = SudokuTest.GenerateFillList();
 
             fillList.ForEach(delegate (int item)
             {
                 puzzle[i, j] = item;
-                if (FillSuccess(i, j))
+                if (SudokuTest.FillSuccess(puzzle, i, j))
                 {
                     if (i == SIZE && j == SIZE)
                     {
@@ -68,12 +68,8 @@ namespace Sudoku
                         FillNextpuzzle(nexti, nextj);
                     }
                 }
-                else
-                {
-                    puzzle[i, j] = 0;
-                }
             });
-            puzzle[i, j] = 0;
+            throw new SolverFailException();
         }
 
         public void Solve()
@@ -84,7 +80,7 @@ namespace Sudoku
             }
             catch (PuzzleCompleteException ex)
             {
-                System.Console.WriteLine(ex.Message);
+                System.Console.WriteLine(ex);
             }
         }
 
@@ -105,35 +101,25 @@ namespace Sudoku
                 }
             }
         }
+    }
 
-        public bool FillSuccess(int i, int j)
+    [Serializable]
+    internal class SolverFailException : Exception
+    {
+        public SolverFailException()
         {
-            // check column
-            for (int ii = i - 1; ii >= 0; ii--)
-            {
-                if (puzzle[i, j] == puzzle[ii, j])
-                    return false;
-            }
+        }
 
-            // check row
-            for (int jj = j - 1; jj >= 0; jj--)
-            {
-                if (puzzle[i, j] == puzzle[i, jj])
-                    return false;
-            }
-            // check small puzzle
-            int basei = i - i % 3;
-            int basej = j - j % 3;
-            for (int ii = basei; ii < basei + 3 && ii < i; ii++)
-            {
-                for (int jj = basej; jj < basei + 3 && jj < j; jj++)
-                {
-                    if (puzzle[i, j] == puzzle[ii, jj])
-                        return false;
-                }
-            }
+        public SolverFailException(string message) : base(message)
+        {
+        }
 
-            return true;
+        public SolverFailException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected SolverFailException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
         }
     }
 }

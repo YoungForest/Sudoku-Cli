@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sudoku
+namespace SudokuLibrary
 {
     [Serializable()]
     public class EnoughResultsException : System.Exception

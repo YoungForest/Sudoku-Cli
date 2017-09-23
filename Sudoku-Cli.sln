@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku-Cli", "Sudoku-Cli\Sudoku-Cli.csproj", "{6ED0E6BC-318D-488D-8A33-7C963EDF60E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sudoku", "Sudoku\Sudoku.csproj", "{10C6FF2B-0225-44C7-9825-ACBC9078F8D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SudokuLibrary", "Sudoku\SudokuLibrary.csproj", "{10C6FF2B-0225-44C7-9825-ACBC9078F8D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{418CE583-2BCC-475B-96FF-E5E317BBD501}"
 EndProject
