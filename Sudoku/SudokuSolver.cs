@@ -9,16 +9,16 @@ namespace Sudoku
     public class SudokuSolver
     {
         public int[,] puzzle = new int[9, 9];
-        public const int SIZE = 9;
+        public const int SIZE = 8;
 
         public void ReadIntoPuzzle(string[] lines)
         {
-            for (int i = 0; i < SIZE; i++)
+            for (int i = 0; i <= SIZE; i++)
             {
                 char[] delimiterChars = { ' ' };
                 string[] words = lines[i].Split(delimiterChars);
 
-                for (int j = 0; j < SIZE; j++)
+                for (int j = 0; j <= SIZE; j++)
                 {
                     try
                     {
@@ -82,9 +82,9 @@ namespace Sudoku
             {
                 FillNextpuzzle(0, 0);
             }
-            catch (PuzzleCompleteException)
+            catch (PuzzleCompleteException ex)
             {
-
+                System.Console.WriteLine(ex.Message);
             }
         }
 
@@ -95,9 +95,9 @@ namespace Sudoku
             {
                 if (space)
                     outputfile.WriteLine();
-                for (int i = 0; i < SIZE; i++)
+                for (int i = 0; i <= SIZE; i++)
                 {
-                    for (int j = 0; j < SIZE; j++)
+                    for (int j = 0; j <= SIZE; j++)
                     {
                         outputfile.Write("{0} ", puzzle[i, j]);
                     }
