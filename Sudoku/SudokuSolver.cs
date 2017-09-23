@@ -55,7 +55,7 @@ namespace SudokuLibrary
             fillList.ForEach(delegate (int item)
             {
                 puzzle[i, j] = item;
-                if (SudokuTest.FillSuccess(puzzle, i, j))
+                if (FillSuccess(i, j))
                 {
                     if (i == SIZE && j == SIZE)
                     {
@@ -69,7 +69,38 @@ namespace SudokuLibrary
                     }
                 }
             });
-            throw new SolverFailException();
+            puzzle[i, j] = 0;
+        }
+
+        // 由于所填格子之后的数是定的，所以无法与Generater共用此函数
+        private bool FillSuccess(int i, int j)
+        {
+            // check column
+            for (int ii = 0; ii <= SIZE; ii++)
+            {
+                if (ii != i && puzzle[i, j] == puzzle[ii, j])
+                    return false;
+            }
+
+            // check row
+            for (int jj = 0; jj <= SIZE; jj++)
+            {
+                if (jj != j && puzzle[i, j] == puzzle[i, jj])
+                    return false;
+            }
+            // check small puzzle
+            int basei = i - i % 3;
+            int basej = j - j % 3;
+            for (int ii = basei; ii < basei + 3; ii++)
+            {
+                for (int jj = basej; jj < basej + 3; jj++)
+                {
+                    if (i != ii && j != jj && puzzle[i, j] == puzzle[ii, jj])
+                        return false;
+                }
+            }
+
+            return true;
         }
 
         public void Solve()
